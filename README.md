@@ -1,16 +1,52 @@
-# Marketing Skills for Claude Code
+# Marketing Skills for AI Agents
 
-A collection of AI agent skills focused on marketing tasks. Built for technical marketers and founders who want Claude Code (or similar AI coding assistants) to help with conversion optimization, copywriting, SEO, analytics, and growth engineering.
+A collection of AI agent skills focused on marketing tasks. Built for technical marketers and founders who want AI coding agents to help with conversion optimization, copywriting, SEO, analytics, and growth engineering. Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the [Agent Skills spec](https://agentskills.io).
 
-Built by [Corey Haines](https://corey.co?ref=marketingskills). Need hands-on help? Check out [Conversion Factory](https://conversionfactory.co?ref=marketingskills) — Corey's agency for conversion optimization, landing pages, and growth strategy. Want to learn more about marketing? Subscribe to [Swipe Files](https://swipefiles.com?ref=marketingskills).
+Built by [Corey Haines](https://corey.co?ref=marketingskills). Need hands-on help? Check out [Conversion Factory](https://conversionfactory.co?ref=marketingskills) — Corey's agency for conversion optimization, landing pages, and growth strategy. Want to learn more about marketing? Subscribe to [Swipe Files](https://swipefiles.com?ref=marketingskills). Want an autonomous AI agent that uses these skills to be your CMO? Try [Magister](https://magistermarketing.com?ref=marketingskills).
 
 New to the terminal and coding agents? Check out the companion guide [Coding for Marketers](https://codingformarketers.com?ref=marketingskills).
 
 **Contributions welcome!** Found a way to improve a skill or have a new one to add? [Open a PR](#contributing).
 
+Run into a problem or have a question? [Open an issue](https://github.com/coreyhaines31/marketingskills/issues) — we're happy to help.
+
 ## What are Skills?
 
-Skills are markdown files that give AI agents specialized knowledge and workflows for specific tasks. When you add these to your project, Claude Code can recognize when you're working on a marketing task and apply the right frameworks and best practices.
+Skills are markdown files that give AI agents specialized knowledge and workflows for specific tasks. When you add these to your project, your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices.
+
+## How Skills Work Together
+
+Skills reference each other and build on shared context. The `product-marketing-context` skill is the foundation — every other skill checks it first to understand your product, audience, and positioning before doing anything.
+
+```
+                            ┌──────────────────────────────────────┐
+                            │      product-marketing-context       │
+                            │    (read by all other skills first)  │
+                            └──────────────────┬───────────────────┘
+                                               │
+    ┌──────────────┬─────────────┬─────────────┼─────────────┬──────────────┬──────────────┐
+    ▼              ▼             ▼             ▼             ▼              ▼              ▼
+┌──────────┐ ┌──────────┐ ┌──────────┐ ┌────────────┐ ┌──────────┐ ┌─────────────┐ ┌───────────┐
+│  SEO &   │ │   CRO    │ │Content & │ │  Paid &    │ │ Growth & │ │  Sales &    │ │ Strategy  │
+│ Content  │ │          │ │   Copy   │ │Measurement │ │Retention │ │    GTM      │ │           │
+├──────────┤ ├──────────┤ ├──────────┤ ├────────────┤ ├──────────┤ ├─────────────┤ ├───────────┤
+│seo-audit │ │page-cro  │ │copywritng│ │paid-ads    │ │referral  │ │revops       │ │mktg-ideas │
+│ai-seo    │ │signup-cro│ │copy-edit │ │ad-creative │ │free-tool │ │sales-enable │ │mktg-psych │
+│site-arch │ │onboard   │ │cold-email│ │ab-test     │ │churn-    │ │launch       │ │           │
+│programm  │ │form-cro  │ │email-seq │ │analytics   │ │ prevent  │ │pricing      │ │           │
+│schema    │ │popup-cro │ │social    │ │            │ │          │ │competitor   │ │           │
+│content   │ │paywall   │ │          │ │            │ │          │ │             │ │           │
+└────┬─────┘ └────┬─────┘ └────┬─────┘ └─────┬──────┘ └────┬─────┘ └──────┬──────┘ └─────┬─────┘
+     │            │            │              │             │              │              │
+     └────────────┴─────┬──────┴──────────────┴─────────────┴──────────────┴──────────────┘
+                        │
+         Skills cross-reference each other:
+           copywriting ↔ page-cro ↔ ab-test-setup
+           revops ↔ sales-enablement ↔ cold-email
+           seo-audit ↔ schema-markup ↔ ai-seo
+```
+
+See each skill's **Related Skills** section for the full dependency map.
 
 ## Available Skills
 
@@ -18,7 +54,11 @@ Skills are markdown files that give AI agents specialized knowledge and workflow
 | Skill | Description |
 |-------|-------------|
 | [ab-test-setup](skills/ab-test-setup/) | When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions "A/B... |
+| [ad-creative](skills/ad-creative/) | When the user wants to generate, iterate, or scale ad creative — headlines, descriptions, primary text, or full ad... |
+| [ai-seo](skills/ai-seo/) | When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers.... |
 | [analytics-tracking](skills/analytics-tracking/) | When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions... |
+| [churn-prevention](skills/churn-prevention/) | When the user wants to reduce churn, build cancellation flows, set up save offers, recover failed payments, or... |
+| [cold-email](skills/cold-email/) | Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails,... |
 | [competitor-alternatives](skills/competitor-alternatives/) | When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when... |
 | [content-strategy](skills/content-strategy/) | When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also... |
 | [copy-editing](skills/copy-editing/) | When the user wants to edit, review, or improve existing marketing copy. Also use when the user mentions 'edit this... |
@@ -38,9 +78,12 @@ Skills are markdown files that give AI agents specialized knowledge and workflow
 | [product-marketing-context](skills/product-marketing-context/) | When the user wants to create or update their product marketing context document. Also use when the user mentions... |
 | [programmatic-seo](skills/programmatic-seo/) | When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions... |
 | [referral-program](skills/referral-program/) | When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy.... |
+| [revops](skills/revops/) | When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes.... |
+| [sales-enablement](skills/sales-enablement/) | When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also... |
 | [schema-markup](skills/schema-markup/) | When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user... |
 | [seo-audit](skills/seo-audit/) | When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO... |
 | [signup-flow-cro](skills/signup-flow-cro/) | When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the... |
+| [site-architecture](skills/site-architecture/) | When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal... |
 | [social-content](skills/social-content/) | When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram,... |
 <!-- SKILLS:END -->
 
@@ -61,7 +104,7 @@ npx skills add coreyhaines31/marketingskills --skill page-cro copywriting
 npx skills add coreyhaines31/marketingskills --list
 ```
 
-This automatically installs to your `.claude/skills/` directory.
+This automatically installs to your `.agents/skills/` directory (and symlinks into `.claude/skills/` for Claude Code compatibility).
 
 ### Option 2: Claude Code Plugin
 
@@ -81,7 +124,7 @@ Clone the entire repo and copy the skills folder:
 
 ```bash
 git clone https://github.com/coreyhaines31/marketingskills.git
-cp -r marketingskills/skills/* .claude/skills/
+cp -r marketingskills/skills/* .agents/skills/
 ```
 
 ### Option 4: Git Submodule
@@ -89,10 +132,10 @@ cp -r marketingskills/skills/* .claude/skills/
 Add as a submodule for easy updates:
 
 ```bash
-git submodule add https://github.com/coreyhaines31/marketingskills.git .claude/marketingskills
+git submodule add https://github.com/coreyhaines31/marketingskills.git .agents/marketingskills
 ```
 
-Then reference skills from `.claude/marketingskills/skills/`.
+Then reference skills from `.agents/marketingskills/skills/`.
 
 ### Option 5: Fork and Customize
 
@@ -115,9 +158,20 @@ npx skillkit install coreyhaines31/marketingskills --skill page-cro copywriting
 npx skillkit install coreyhaines31/marketingskills --list
 ```
 
+## Upgrading from v1.0
+
+Skills now use `.agents/` instead of `.claude/` for the product marketing context file. Move your existing context file:
+
+```bash
+mkdir -p .agents
+mv .claude/product-marketing-context.md .agents/product-marketing-context.md
+```
+
+Skills will still check `.claude/` as a fallback, so nothing breaks if you don't.
+
 ## Usage
 
-Once installed, just ask Claude Code to help with marketing tasks:
+Once installed, just ask your agent to help with marketing tasks:
 
 ```
 "Help me optimize this landing page for conversions"
@@ -154,22 +208,29 @@ You can also invoke skills directly:
 ### Content & Copy
 - `copywriting` - Marketing page copy
 - `copy-editing` - Edit and polish existing copy
+- `cold-email` - B2B cold outreach emails and sequences
 - `email-sequence` - Automated email flows
 - `social-content` - Social media content
 
 ### SEO & Discovery
 - `seo-audit` - Technical and on-page SEO
+- `ai-seo` - AI search optimization (AEO, GEO, LLMO)
 - `programmatic-seo` - Scaled page generation
+- `site-architecture` - Page hierarchy, navigation, URL structure
 - `competitor-alternatives` - Comparison and alternative pages
 - `schema-markup` - Structured data
 
 ### Paid & Distribution
 - `paid-ads` - Google, Meta, LinkedIn ad campaigns
+- `ad-creative` - Bulk ad creative generation and iteration
 - `social-content` - Social media scheduling and strategy
 
 ### Measurement & Testing
 - `analytics-tracking` - Event tracking setup
 - `ab-test-setup` - Experiment design
+
+### Retention
+- `churn-prevention` - Cancel flows, save offers, dunning, payment recovery
 
 ### Growth Engineering
 - `free-tool-strategy` - Marketing tools and calculators
@@ -180,6 +241,10 @@ You can also invoke skills directly:
 - `marketing-psychology` - Mental models and psychology
 - `launch-strategy` - Product launches and announcements
 - `pricing-strategy` - Pricing, packaging, and monetization
+
+### Sales & RevOps
+- `revops` - Lead lifecycle, scoring, routing, pipeline management
+- `sales-enablement` - Sales decks, one-pagers, objection docs, demo scripts
 
 ## Contributing
 
